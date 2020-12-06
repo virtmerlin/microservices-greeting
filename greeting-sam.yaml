@@ -38,7 +38,7 @@ Resources:
             - Effect: "Allow"
               Action:
                 - "ssm:PutParameter"
-              Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/GreetingApiEndpoint"        
+              Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/GreetingApiEndpoint"
       Events:
         greet:
           Type: Api
@@ -72,7 +72,7 @@ Resources:
                 uri: !Sub "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GreetingFunction.Arn}:${LambdaAlias}/invocations"
   Parameter:
     Type: "AWS::SSM::Parameter"
-    Properties: 
+    Properties:
       Name: GreetingApiEndpoint
       Description: Greeting API Endpoint
       Type: String
@@ -86,7 +86,7 @@ Resources:
       Runtime: nodejs10.x
       FunctionName: CodeDeployHook_gretting_preTrafficHook
       DeploymentPreference:
-        Enabled: false  
+        Enabled: false
       Policies:
         - Version: "2012-10-17"
           Statement:
@@ -108,7 +108,7 @@ Resources:
       Runtime: nodejs10.x
       FunctionName: CodeDeployHook_gretting_postTrafficHook
       DeploymentPreference:
-        Enabled: false  
+        Enabled: false
       Policies:
         - Version: "2012-10-17"
           Statement:
