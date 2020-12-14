@@ -48,6 +48,8 @@ Resources:
             RestApiId: !Ref GreetingApi
       DeploymentPreference:
         Type: !Ref CanaryDeploymentType
+        Hooks:
+            PreTraffic: !Ref PreTrafficLambdaFunction
         Alarms:
           - LambdaAliasErrorMetricGreaterThanZeroAlarm
           - LambdaLatestVersionErrorMetricGreaterThanZeroAlarm
@@ -100,6 +102,11 @@ Resources:
               Action:
                 - "lambda:InvokeFunction"
               Resource: "*"
+      Timeout: 5
+      Environment:
+        Variables:
+          NewVersion: !Ref GreetingFunction.Version
+
   PostTrafficLambdaFunction:
     Type: AWS::Serverless::Function
     Properties:
